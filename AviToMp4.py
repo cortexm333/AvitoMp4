@@ -40,7 +40,7 @@ class Converter(object):
             return False
         return True
 
-    def subprocess_call(self, src, dst):
+    def call_subprocess(self, src, dst):
         print(self.command.format(src, dst))
         subprocess.call(self.command.format(self.path + "//" +
                                             src, self.path + "//" + dst))
@@ -51,7 +51,7 @@ class Converter(object):
         for file in self.avi_files:
             avi_file = file
             mp4_file = file.replace('.avi', '.mp4')
-            proc.apply_async(self.subprocess_call, args=(avi_file, mp4_file))
+            proc.apply_async(self.call_subprocess, args=(avi_file, mp4_file))
         proc.close()
         proc.join()
 
